@@ -1,0 +1,6 @@
+{
+  "Name": "tf-session-create",
+  "Type": "client",
+  "Rules": "session \"\" {  policy = \"write\" } "
+}
+
