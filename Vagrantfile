@@ -63,28 +63,18 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    if ! [ -x "$(command -v unzip)" ]; then
-      apt-get update
-      apt-get install -y unzip
-    fi
-
-    if ! [ -x "$(command -v consul)" ]; then
-      pushd /tmp
-      # Download and extract consul to /usr/local/bin
-      wget https://releases.hashicorp.com/consul/1.1.0/consul_1.1.0_linux_amd64.zip -O consul.zip
-      unzip consul.zip -d /usr/local/bin
-      rm consul.zip
+  config.vm.provision "shell",  privileged: false, inline: <<-SHELL
+    pushd /tmp
+    DEVSETUP_CLONE="devsetup"
+    if [ -d "$DEVSETUP_CLONE" ]; then
+      pushd $DEVSETUP_CLONE
+      git pull
       popd
+    else
+      git clone https://github.com/amitsaha/devsetup.git
     fi
-
-    if ! [ -x "$(command -v terraform)" ]; then
-      pushd /tmp
-      # Same for Terraform
-      wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip -O terraform.zip
-      unzip terraform.zip -d /usr/local/bin
-      rm terraform.zip
-      popd
-    fi
+    cd devsetup
+    ./setup.sh
+    popd
   SHELL
 end
