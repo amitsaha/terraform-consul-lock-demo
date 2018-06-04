@@ -3,8 +3,6 @@ import consul
 MASTER_TOKEN = "Arandom$tring"
 client = consul.Consul(token=MASTER_TOKEN)
 
-client.kv.put('terraform/state','')
-
 rules = """
     key "terraform/state" {
         policy = "read"
