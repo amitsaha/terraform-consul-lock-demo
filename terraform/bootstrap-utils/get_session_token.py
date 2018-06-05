@@ -1,4 +1,6 @@
 import consul
+import json
+import pprint
 
 MASTER_TOKEN = "Arandom$tring"
 client = consul.Consul(token=MASTER_TOKEN)
@@ -16,4 +18,4 @@ rules = """
     }
 """
 token = client.acl.create(rules=rules)
-print(token)
+print(json.dumps(token, indent=4))
