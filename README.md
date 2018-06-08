@@ -1,6 +1,3 @@
-## Start consul server
+# Terraform with Consul Remote backend
 
-```
-$ consul agent -dev --config-file=./consul/server-config.json
-```
-
+This is a demo repository to setup consul backend with terraform.
