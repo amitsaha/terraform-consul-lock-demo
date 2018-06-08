@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-pushd ../bootstrap
+pushd ../bootstrap-utils
+pipenv install
 terraform_token=$(pipenv run python get_session_token.py)
 popd
 
