@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
+# needed for click (used by pipenv)
+export LANG=C.UTF-8
 
 pushd ../configuration-utils
 pipenv install

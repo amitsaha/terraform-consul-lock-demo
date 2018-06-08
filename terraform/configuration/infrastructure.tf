@@ -5,6 +5,6 @@ resource "consul_keys" "app1_version" {
   token = "${var.app1_version_token}"
    key {
     path  = "app1/version"
-    value = "0.1"
+    value = "0.2"
   }
 }
